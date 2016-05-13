@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>App Download and CMX example</title>
+<link rel="stylesheet" href="https://stackedit.io/res-min/themes/base.css" />
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body><div class="container"><h1 id="app-download-and-cmx-example">App Download and CMX example</h1>
+
+<p>這是第三方活動的設定範例，以App下載為例</p>
+
+
+
+<h2 id="第三方服務範例">第三方服務範例</h2>
+
+<p>要整合IIOT WiFiOTG服務，可以分為兩個部分：</p>
+
+<ol>
+<li>認證上網前(只有在白名單內的網域可以被存取)</li>
+<li>認證上網後</li>
+</ol>
+
+<p>在範例程式當中，我們提供了<code>landing.html</code> 以及<code>app.html</code></p>
+
+<p><a href="https://github.com/kiiot/activity-example">範例程式</a></p>
+
+<p><strong>landing.html</strong> <br>
+顧客連上WiFi時，IIOT WiFiOTG會將他們轉址到第三方服務(landing.html)，由於還是認證上網前，此時顧客所能瀏覽的網域是被限制的。當顧客完成第三方服務所提供的活動，可將顧客轉址回<code>base_grant_url</code> 所提供的callback url，來告知IIOT WiFiOTG可開放此顧客上網。</p>
+
+<p><strong>app.html</strong> <br>
+當顧客網路開通後，會看到的頁面。</p>
+
+<h2 id="架設-cmx-server-來接收資料">架設 cmx server 來接收資料</h2>
+
+<p>若要接收cmx資料，可以參考以下程式碼 <br>
+<a href="https://github.com/kiiot/server-example">Example Code</a></p>
+
+<p>其中需要設定驗證碼以及port，驗證碼需要建立活動才可以產生， <br>
+因此活動建立完成以後再回來填寫。</p>
+
+<h2 id="app-下載活動範例">App 下載活動範例</h2>
+
+
+
+<h4 id="step1-登入-iiot-admin-portal">Step1. 登入 <a href="http://admin.iiot.io">IIOT Admin Portal</a></h4>
+
+
+
+<h4 id="step2-編輯熱點活動">Step2. 編輯熱點活動</h4>
+
+<ul>
+<li>在熱點活動頁面中，點擊 <strong>Add New Activity/新增熱點活動</strong> </li>
+<li>接著到一般參數配置頁面中，展開進階設定</li>
+<li>填寫要接收data的cmx server 路徑到<strong>CMX應用程式介面Post網址</strong> <br>
+例如： <code>http://myserver.com:3000/cmx</code></li>
+<li>在<strong>CMX API密碼</strong>中填寫secret, IIOT WiFiOTG Service傳送data給cmx server時會附帶這個secret來做認證。</li>
+<li>點擊<strong>建立</strong> 來產生一串cmx驗證碼，先將驗證碼記下來，填寫到cmx server的設定中。先別點擊驗證(要等到儲存活動以後再進行驗證)</li>
+<li>在白名單中，加入您服務所使用的所有網域，沒有填入的網域將導致landing page無法載入的問題。</li>
+<li>點擊下一步進入模組參數配置</li>
+</ul>
+
+
+
+<h4 id="step3-模組參數配置">Step3. 模組參數配置</h4>
+
+<p>第三方服務的整合需要使用三個模組:</p>
+
+<p><strong>模組1. 轉址模組</strong></p>
+
+<pre><code>將visitor client 轉址到第三方服務(需要將服務網域加入白名單)。
+
+注意此處需將"模組接續模式"選取為"等待程式認證接續"，告知IIOT WiFiOTG 服務需要等待第三方服務的callback
+</code></pre>
+
+<p><strong>模組2. 認證上網模組</strong></p>
+
+<pre><code>當第三方服務完成活動後，將顧客轉址回IIOT WiFiOTG，此時將會開放顧客所有網路。
+</code></pre>
+
+<p><em>* 模組3. 轉址模組*</em></p>
+
+<pre><code>開放顧客網路後，顧客看到的頁面。在此應用場景中，就是將顧客導向App 下載頁面(Google Play/App Store)
+</code></pre>
+
+
+
+<h4 id="step-4-儲存並驗證活動">Step 4.  儲存並驗證活動</h4>
+
+<ol>
+<li>儲存並部署熱點活動後，回到活動編輯頁面 &gt; 一般參數配置_進階設定 中</li>
+<li>啟動cmx 接收server</li>
+<li>點擊驗證。</li>
+<li>看到已驗證即代表成功，記得將Activity儲存。</li>
+</ol>
+
+<h4 id="step-5-驗證活動即cmx-資料">Step 5. 驗證活動即cmx 資料</h4>
+
+<p>點擊預覽熱點活動，可體驗顧客瀏覽服務的流程。 <br>
+範例程式cmx server在接收到cmx會印在console</p></div></body>
+</html>
