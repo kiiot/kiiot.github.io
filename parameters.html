@@ -1,22 +1,25 @@
 <!DOCTYPE html><html><head><title>IIOT Email Template Example</title><meta charset='utf-8'><link href='https://dn-maxiang.qbox.me/res-min/themes/marxico.css' rel='stylesheet'><style></style></head><body><div id='preview-contents' class='note-content'>
                         <div id="wmd-preview" class="preview-content"></div>
-                    <div id="wmd-preview-section-7" class="wmd-preview-section preview-content">
+                    <div id="wmd-preview-section-1" class="wmd-preview-section preview-content">
 
-</div><div id="wmd-preview-section-24" class="wmd-preview-section preview-content">
+</div><div id="wmd-preview-section-2" class="wmd-preview-section preview-content">
 
 <h1 id="iiot-email-template-example">IIOT Email Template Example</h1>
 
-</div><div id="wmd-preview-section-579" class="wmd-preview-section preview-content">
+</div><div id="wmd-preview-section-3" class="wmd-preview-section preview-content">
 
 <h2 id="parameters">Parameters</h2>
 
-<p>參數種類</p></div><div id="wmd-preview-section-994" class="wmd-preview-section preview-content">
+<p>參數種類</p>
+
+</div><div id="wmd-preview-section-85" class="wmd-preview-section preview-content">
 
 <h3 id="1-formresult">1. formResult</h3>
 
 <p>表單填寫資訊</p>
 
 <ul><li>姓名：<code>{{formResult.name}}</code></li>
+<li>郵件地址：<code>{{formResult.email}}</code></li>
 <li>電話：<code>{{formResult.phoneNumber}}</code></li>
 <li>出發日期：<code>{{formResult.departureDate}}</code></li>
 <li>出發班機：<code>{{formResult.departureFlightNo}}</code></li>
@@ -26,7 +29,7 @@
 <li>還機地點: <code>{{formulaResult.returnMethod}}</code></li>
 <li>台數：<code>{{formResult.amount}}</code></li>
 <li>優惠碼: <code>{{formResult.couponCode}}</code></li>
-</ul></div><div id="wmd-preview-section-1296" class="wmd-preview-section preview-content">
+</ul></div><div id="wmd-preview-section-5" class="wmd-preview-section preview-content">
 
 <h3 id="2-formularesult">2. formulaResult</h3>
 
@@ -38,11 +41,11 @@
 <li>優惠折扣:<code>{{formulaResult.couponDiscountAmount}}</code></li>
 </ul>
 
-</div><div id="wmd-preview-section-1677" class="wmd-preview-section preview-content">
+</div><div id="wmd-preview-section-459" class="wmd-preview-section preview-content">
 
 <h3 id="3-invoice">3. invoice</h3>
 
-<p>帳單明細</p>
+<p>帳單明細/付款相關</p>
 
 <ul><li>訂單編號: <code>{{invoice.MerchantOrderNo}}</code></li>
 <li>付款方式: <code>{{invoice.PaymentType}}</code></li>
@@ -51,10 +54,14 @@
 <li>付款時間: <code>{{invoice.PayTime}}</code></li>
 <li>訂單連結: <code>{{invoice.url}}</code></li>
 <li>訂單驗證碼: <code>{{invoice.pin}}</code></li>
-</ul></div><div id="wmd-preview-section-316" class="wmd-preview-section preview-content">
+<li>銀行代碼: <code>{{invoice.BankCode}}</code></li>
+<li>繳費代碼: <code>{{invoice.CodeNo}}</code></li>
+<li>繳費終止日期: <code>{{invoice.ExpireDate}}</code></li>
+<li>繳費終止時間: <code>{{invoice.ExpireTime}}</code></li>
+</ul></div><div id="wmd-preview-section-7" class="wmd-preview-section preview-content">
 
 <h2 id="範例">範例</h2>
 
-</div><div id="wmd-preview-section-1688" class="wmd-preview-section preview-content">
+</div><div id="wmd-preview-section-8" class="wmd-preview-section preview-content">
 
-<pre class="prettyprint hljs-dark"><code class="hljs crystal"><span class="hljs-constant">Hello</span> <span class="hljs-expansion">{{formResult.name}}</span><br>收到你的預訂資料囉，請確認一下您的資訊是否都正確喔<br><br>---<br>姓名：<span class="hljs-expansion">{{formResult.name}}</span><br>電話：<span class="hljs-expansion">{{formResult.phoneNumber}}</span><br>出發日期：<span class="hljs-expansion">{{formResult.departureDate}}</span><br>出發班機：<span class="hljs-expansion">{{formResult.departureFlightNo}}</span><br>取件地點: <span class="hljs-expansion">{{formulaResult.pickupMethod}}</span><br>宅配地址: <span class="hljs-expansion">{{formResult.shipmentAddress}}</span><br>回國日期: <span class="hljs-expansion">{{formResult.arrivalDate}}</span><br>回程航班: <span class="hljs-expansion">{{formResult.arrivalFlightNo}}</span><br>還機地點: <span class="hljs-expansion">{{formulaResult.returnMethod}}</span><br>台數：<span class="hljs-expansion">{{formResult.amount}}</span><br>優惠碼: <span class="hljs-expansion">{{formResult.couponCode}}</span><br><br>--<br>訂單資訊：<span class="hljs-expansion">{{invoice.url}}</span> (驗證碼：<span class="hljs-expansion">{{invoice.pin}}</span>)<br>訂單編號: <span class="hljs-expansion">{{invoice.<span class="hljs-constant">MerchantOrderNo</span>}}</span><br>付款方式: <span class="hljs-expansion">{{invoice.<span class="hljs-constant">PaymentType</span>}}</span><br>金額: <span class="hljs-expansion">{{invoice.<span class="hljs-constant">Amt</span>}}</span><br>交易編號: <span class="hljs-expansion">{{invoice.<span class="hljs-constant">TradeNo</span>}}</span><br>付款時間: <span class="hljs-expansion">{{invoice.<span class="hljs-constant">PayTime</span>}}</span><br><br>如果有任何問題，歡迎與我們聯繫<br>祝您有個美好的一天 ^_^<br><br><span class="hljs-constant">Go</span> <span class="hljs-constant">WiFi</span> 客服小組 敬上<br><span class="hljs-constant">FB</span>:  <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/www.facebook.com/</span><span class="hljs-number">52</span>gowifi<br><span class="hljs-constant">Tel</span>: <span class="hljs-number">02</span>-<span class="hljs-number">85222608</span> (<span class="hljs-number">09</span>:<span class="hljs-number">00</span>-<span class="hljs-number">20</span>:<span class="hljs-number">00</span>) <br><span class="hljs-constant">Email</span>: contact<span class="hljs-variable">@gowifi</span>.com.tw<br><span class="hljs-constant">Line</span>: <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/line.me/ti</span><span class="hljs-regexp">/p/</span>%<span class="hljs-number">40</span>vlx3022p<br><br></code></pre></div><div id="wmd-preview-section-318" class="wmd-preview-section preview-content"></div><div id="wmd-preview-section-footnotes" class="preview-content"></div></div></body></html>
+<pre class="prettyprint hljs-dark"><code class="hljs crystal"><span class="hljs-constant">Hello</span> <span class="hljs-expansion">{{formResult.name}}</span><br>收到你的預訂資料囉，請確認一下您的資訊是否都正確喔<br><br>---<br>姓名：<span class="hljs-expansion">{{formResult.name}}</span><br>電話：<span class="hljs-expansion">{{formResult.phoneNumber}}</span><br>出發日期：<span class="hljs-expansion">{{formResult.departureDate}}</span><br>出發班機：<span class="hljs-expansion">{{formResult.departureFlightNo}}</span><br>取件地點: <span class="hljs-expansion">{{formulaResult.pickupMethod}}</span><br>宅配地址: <span class="hljs-expansion">{{formResult.shipmentAddress}}</span><br>回國日期: <span class="hljs-expansion">{{formResult.arrivalDate}}</span><br>回程航班: <span class="hljs-expansion">{{formResult.arrivalFlightNo}}</span><br>還機地點: <span class="hljs-expansion">{{formulaResult.returnMethod}}</span><br>台數：<span class="hljs-expansion">{{formResult.amount}}</span><br>優惠碼: <span class="hljs-expansion">{{formResult.couponCode}}</span><br><br>--<br>訂單資訊：<span class="hljs-expansion">{{invoice.url}}</span> (驗證碼：<span class="hljs-expansion">{{invoice.pin}}</span>)<br>訂單編號: <span class="hljs-expansion">{{invoice.<span class="hljs-constant">MerchantOrderNo</span>}}</span><br>付款方式: <span class="hljs-expansion">{{invoice.<span class="hljs-constant">PaymentType</span>}}</span><br>金額: <span class="hljs-expansion">{{invoice.<span class="hljs-constant">Amt</span>}}</span><br>交易編號: <span class="hljs-expansion">{{invoice.<span class="hljs-constant">TradeNo</span>}}</span><br>付款時間: <span class="hljs-expansion">{{invoice.<span class="hljs-constant">PayTime</span>}}</span><br><br>如果有任何問題，歡迎與我們聯繫<br>祝您有個美好的一天 ^_^<br><br><span class="hljs-constant">Go</span> <span class="hljs-constant">WiFi</span> 客服小組 敬上<br><span class="hljs-constant">FB</span>:  <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/www.facebook.com/</span><span class="hljs-number">52</span>gowifi<br><span class="hljs-constant">Tel</span>: <span class="hljs-number">02</span>-<span class="hljs-number">85222608</span> (<span class="hljs-number">09</span>:<span class="hljs-number">00</span>-<span class="hljs-number">20</span>:<span class="hljs-number">00</span>) <br><span class="hljs-constant">Email</span>: contact<span class="hljs-variable">@gowifi</span>.com.tw<br><span class="hljs-constant">Line</span>: <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/line.me/ti</span><span class="hljs-regexp">/p/</span>%<span class="hljs-number">40</span>vlx3022p<br><br></code></pre></div><div id="wmd-preview-section-footnotes" class="preview-content"></div></div></body></html>
