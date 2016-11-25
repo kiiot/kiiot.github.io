@@ -1,0 +1,34 @@
+<!DOCTYPE html><html><head><title>IIOT 憑證變數設定</title><meta charset='utf-8'><link href='https://dn-maxiang.qbox.me/res-min/themes/marxico.css' rel='stylesheet'><style></style></head><body><div id='preview-contents' class='note-content'>
+                        
+
+<h1 id="iiot-憑證變數設定">IIOT 憑證變數設定</h1>
+
+<p>憑證設計有自訂變數的功能</p>
+
+
+
+<h2 id="基本變數">基本變數</h2>
+
+<p>憑證連結</p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs crystal"><span class="hljs-expansion">{{codeLink}}</span><br></code></pre>
+
+<p>憑證碼</p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs crystal"><span class="hljs-expansion">{{code}}</span><br></code></pre>
+
+
+
+<h2 id="訂單自訂變數">訂單自訂變數</h2>
+
+<p>可於上傳訂單中，新增自訂變數</p>
+
+<p><strong>限制: 僅支援小寫、可用底線分隔</strong></p>
+
+<p>範例：</p>
+
+<p>在Excel新增一個欄位，標頭為<code>shipment_address</code></p>
+
+<p>即可在憑證內容中，使用自訂變數</p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs crystal">您的宅配地址為：<span class="hljs-expansion">{{order.shipment_address}}</span><br></code></pre></div></body></html>
