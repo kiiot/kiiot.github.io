@@ -1,5 +1,8 @@
 <!DOCTYPE html><html><head><title>IIOT 憑證變數設定</title><meta charset='utf-8'><link href='https://dn-maxiang.qbox.me/res-min/themes/marxico.css' rel='stylesheet'><style></style></head><body><div id='preview-contents' class='note-content'>
                         
+                    
+
+
 
 <h1 id="iiot-憑證變數設定">IIOT 憑證變數設定</h1>
 
@@ -31,4 +34,12 @@
 
 <p>即可在憑證內容中，使用自訂變數</p>
 
-<pre class="prettyprint hljs-dark"><code class="hljs crystal">您的宅配地址為：<span class="hljs-expansion">{{order.shipment_address}}</span><br></code></pre></div></body></html>
+<pre class="prettyprint hljs-dark"><code class="hljs crystal">您的宅配地址為：<span class="hljs-expansion">{{order.shipment_address}}</span><br></code></pre>
+
+
+
+<h2 id="範例">範例</h2>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs crystal">親愛的 <span class="hljs-expansion">{{order.name}}</span> 您好，<br>您的預約編號 <span class="hljs-expansion">{{order.order_no}}</span> 已送達櫃檯，<br>請點擊連結 <span class="hljs-expansion">{{codeLink}}</span> 至櫃檯取貨，謝謝您。<br></code></pre></div></body></html>
