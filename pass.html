@@ -1,0 +1,126 @@
+<!DOCTYPE html><html><head><title>IIOT 票卡欄位及變數說明</title><meta charset='utf-8'><link href='https://dn-maxiang.qbox.me/res-min/themes/marxico.css' rel='stylesheet'><style></style></head><body><div id='preview-contents' class='note-content'>
+                        
+                    
+
+
+
+<h1 id="iiot-票卡欄位及變數說明">IIOT 票卡欄位及變數說明</h1>
+
+<p>本文將介紹IIOT票卡欄位，及如何在欄位中套用變數</p>
+
+<hr>
+
+<p>IIOT票卡欄位可分為下列幾種：</p>
+
+<ol><li rel="1">用戶檔案資訊</li>
+<li rel="2">廣播訊息</li>
+<li rel="3">個人推播訊息</li>
+<li rel="4">系統欄位</li>
+<li rel="5">變數欄位</li>
+</ol>
+
+<p>皆可放在票卡欄位(正面)、訊息 (背面)</p>
+
+<h2 id="用戶檔案資訊">用戶檔案資訊</h2>
+
+<p>當用戶取卡(或匯入用戶資訊準備生卡時)，需填寫的欄位，可放置於票卡欄位(正面)、訊息(背面)。</p>
+
+<p>如果要用戶填寫，但卻不希望顯示於票卡上，可將欄位設定在<strong>參數配置</strong>中的<strong>會員開卡時必填欄位</strong></p>
+
+<p>用戶檔案包含以下幾種，有各自的欄位屬性</p>
+
+<ol><li rel="1">電話號碼(必設定) - tel</li>
+<li rel="2">姓名 - 文字</li>
+<li rel="3">性別 - 男 or 女</li>
+<li rel="4">生日 - Date</li>
+<li rel="5">電子郵件 - email</li>
+<li rel="6">家鄉 - list</li>
+<li rel="7">現居城市 - list</li>
+<li rel="8">自訂用戶資料 - 文字</li>
+</ol>
+
+<p>設定自訂用戶資料時，須提供欄位標題以及<code>key</code>，這個<code>key</code>是用來區分多個自訂用戶資料的，可設定12個字母內的英文小寫，例如可自訂</p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs vbnet">標題: 班級<br><span class="hljs-keyword">key</span>: <span class="hljs-keyword">myclass</span><br></code></pre>
+
+<p>如此，即可搜集用戶的「班級」資料</p>
+
+
+
+<h2 id="廣播訊息">廣播訊息</h2>
+
+<p>當票卡發行商要群播信息給所有用戶時，要透過<strong>行銷訊息</strong>欄位，此欄位內容用戶取卡/匯入用戶清單時不需要填寫，由後台主動新增/修改。</p>
+
+
+
+<h2 id="個人推播訊息">個人推播訊息</h2>
+
+<p>若是要更改、推播某張特定票卡，可透過欄位<strong>第三方程式介面</strong>，此欄位除了飄提，還需要設定<code>Key</code>以及預設資訊。</p>
+
+<p><code>Key</code>是如果要透過第三方程式來更新此張票卡時，透過這個設定的key來指定是要更新此票卡</p>
+
+
+
+<h2 id="系統欄位">系統欄位</h2>
+
+<p>由系統所控制的欄位，不需由後台管理員或是用戶取卡填寫，包括以下欄位：</p>
+
+<ol><li rel="1">條碼資訊 - 條碼內容資訊</li>
+<li rel="2">點 - 會員系統的點數</li>
+</ol>
+
+
+
+<h2 id="變數欄位">變數欄位</h2>
+
+<p>變數欄位基本上也是由系統控制，後台管理者在此欄位內容設定變數，系統將依據每張票卡的用戶檔案及票卡資訊，動態設定此種欄位。</p>
+
+<p><strong>若是要設定用戶檔案為變數，一定要記得新增欄位用以搜集用戶檔案資訊</strong></p>
+
+
+
+<h3 id="變數說明">變數說明</h3>
+
+<p><strong>系統變數：</strong></p>
+
+<p><code>{{pass.barcodeMessage}}</code> : 票卡條碼 <br>
+<code>{{pass.distId}}</code> : 票卡ID <br>
+<code>{{pass.phoneNumber}}</code>: 票卡綁定電話 <br>
+<code>{{pass.cardId}}</code>:  票卡綁定ID (目前等同於電話)</p>
+
+<p><strong>用戶檔案變數</strong></p>
+
+<p><code>{{pass.displayName}}</code>:  姓名 <br>
+<code>{{pass.phoneNumber}}</code>: 電話 <br>
+<code>{{pass.birthday}}</code>: 生日 <br>
+<code>{{pass.email}}</code>: 電子郵件 <br>
+<code>{{pass.gender}}</code>: 性別 <br>
+<code>{{pass.hometown}}</code>: 家鄉 <br>
+<code>{{pass.location}}</code>: 居住地 <br>
+<code>{{pass.[customKey]}}</code>: 根據管理者設定的自訂用戶欄位的key顯示，例如<code>pass.class</code></p>
+
+<h3 id="欄位說明">欄位說明</h3>
+
+<ol><li rel="1">個人化連結 - 可將變數填寫至連結中</li>
+<li rel="2">個人檔案 - 可編輯用戶檔案</li>
+</ol>
+
+<p><strong>範例：個人化連結</strong></p>
+
+<p>連結設定</p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs groovy"><span class="hljs-string">http:</span><span class="hljs-comment">//demo.iiot.io?q={{pass.barcodeMessage}}</span><br></code></pre>
+
+<p>標題設定</p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs">連結點我<br></code></pre>
+
+<p>如此，票卡上此欄位將會顯示「連結點我」，並且連結位置將會是<code>http://demo.iiot.io?q=abcdefg</code></p>
+
+<p><strong>範例：個人檔案</strong></p>
+
+<p>在用戶檔案中填寫</p>
+
+<pre class="prettyprint hljs-dark"><code class="language-bash hljs">您的個人學習資料<br>班級：{{pass.class}}  // 此為自訂用戶欄位<br>姓名：{{pass.displayName}} // 姓名欄位<br></code></pre>
+
+<p>如此，系統將根據每張票卡的用戶檔案及票卡資訊來設定此欄位內容</p></div></body></html>
