@@ -14,17 +14,29 @@
 
 <p>憑證連結</p>
 
-<pre class="prettyprint hljs-dark"><code class="hljs crystal"><span class="hljs-expansion">{{codeLink}}</span><br></code></pre>
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs clojure"><span style="display:inline">{{codeLink}}</span><div style="height:0;font-size:0;"><br style="height:0"></div></code></pre>
 
 <p>憑證碼</p>
 
-<pre class="prettyprint hljs-dark"><code class="hljs crystal"><span class="hljs-expansion">{{code}}</span><br></code></pre>
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs clojure"><span style="display:inline">{{code}}</span><div style="height:0;font-size:0;"><br style="height:0"></div></code></pre>
 
 
 
-<h2 id="訂單自訂變數">訂單自訂變數</h2>
+<h2 id="整合倉管系統">整合倉管系統</h2>
 
-<p>可於上傳訂單中，新增自訂變數</p>
+<p>透過IIOT倉管系統，有下列已定義變數可使用</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs axapta"><span style="display:inline">{{</span><span class="hljs-keyword">order</span><span style="display:inline">.order_no}} </span><span class="hljs-comment">// 訂單編號</span><div style="height:0;font-size:0;"><br style="height:0"></div><span style="display:inline">{{</span><span class="hljs-keyword">order</span><span style="display:inline">.name}} </span><span class="hljs-comment">// 姓名</span><div style="height:0;font-size:0;"><br style="height:0"></div><span style="display:inline">{{</span><span class="hljs-keyword">order</span><span style="display:inline">.email}} </span><span class="hljs-comment">// 郵件</span><div style="height:0;font-size:0;"><br style="height:0"></div><span style="display:inline">{{</span><span class="hljs-keyword">order</span><span style="display:inline">.qty}} </span><span class="hljs-comment">// 數量</span><div style="height:0;font-size:0;"><br style="height:0"></div><span style="display:inline">{{</span><span class="hljs-keyword">order</span><span style="display:inline">.country}} </span><span class="hljs-comment">// 國家</span><div style="height:0;font-size:0;"><br style="height:0"></div><span style="display:inline">{{</span><span class="hljs-keyword">order</span><span style="display:inline">.product}} </span><span class="hljs-comment">// 商品</span><div style="height:0;font-size:0;"><br style="height:0"></div></code></pre>
+
+<h2 id="第三方自行上傳訂單自訂變數">第三方/自行上傳訂單自訂變數</h2>
+
+<p>透過Excel上傳訂單，可於上傳訂單中，新增自訂變數</p>
 
 <p><strong>限制: 僅支援小寫、可用底線分隔</strong></p>
 
@@ -34,7 +46,9 @@
 
 <p>即可在憑證內容中，使用自訂變數</p>
 
-<pre class="prettyprint hljs-dark"><code class="hljs crystal">您的宅配地址為：<span class="hljs-expansion">{{order.shipment_address}}</span><br></code></pre>
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs xquery"><span style="display:inline">您的宅配地址為：{{order.shipment_address}}</span><div style="height:0;font-size:0;"><br style="height:0"></div></code></pre>
 
 
 
@@ -42,4 +56,4 @@
 
 
 
-<pre class="prettyprint hljs-dark"><code class="hljs crystal">親愛的 <span class="hljs-expansion">{{order.name}}</span> 您好，<br>您的預約編號 <span class="hljs-expansion">{{order.order_no}}</span> 已送達櫃檯，<br>請點擊連結 <span class="hljs-expansion">{{codeLink}}</span> 至櫃檯取貨，謝謝您。<br></code></pre></div></body></html>
+<pre class="prettyprint hljs-dark"><code class="hljs xquery"><span style="display:inline">親愛的 {{order.name}} 您好，</span><div style="height:0;font-size:0;"><br style="height:0"></div><span style="display:inline">您的預約編號 {{order.order_no}} 已送達櫃檯，</span><div style="height:0;font-size:0;"><br style="height:0"></div><span style="display:inline">請點擊連結 {{codeLink}} 至櫃檯取貨，謝謝您。</span><div style="height:0;font-size:0;"><br style="height:0"></div></code></pre></div></body></html>
