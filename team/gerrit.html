@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hello!</title>
+<link rel="stylesheet" href="https://stackedit.io/res-min/themes/base.css" />
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body><div class="container"><h1 id="about-gerrit">About Gerrit</h1>
+
+<p>之後編輯code以及commit的位置都是gerrit，可參考<a href="http://gerrit.iiot.io">IIOT Gerrit</a></p>
+
+<p>每次commit以後，會在gerrit web 產生一個紀錄，新人需要Add reviewer，由reviewer來做Verify(+1), Code-Review(+2)， <br>
+當commit有+2以上時，才可以Submit。至此其他人才能從Gerrit上Pull到最新的Code</p>
+
+<p>Submit以後，Gerrit會自動同步Bitbucket，因此Bitbucket上的Code以及Commits會被overwrite <br>
+所以<strong>一但導入Gerrit，大家要一起切換，否則commits 會消失</strong></p>
+
+
+
+<h1 id="gerrit-的設定">Gerrit 的設定</h1>
+
+<p>關於ssh的設定請參考文件</p>
+
+<p>將ssh key設定好之後，設定<code>.ssh/config</code></p>
+
+
+
+<pre class="prettyprint"><code class=" hljs avrasm">Host gerrit<span class="hljs-preprocessor">.iiot</span><span class="hljs-preprocessor">.io</span>
+    User myname
+    IdentityFile ~/<span class="hljs-preprocessor">.ssh</span>/id_rsa
+    port <span class="hljs-number">29418</span></code></pre>
+
+
+
+<h2 id="建立新專案">建立新專案</h2>
+
+<p>要建立一個新專案需要去bitbucket的<strong>iiot_ateam</strong>建立一個repository， <br>
+建立好以後，到Gerrit建立一個同名的Project。</p>
+
+<p>目前的設定，Gerrit會去Sync bitbucket <strong>iiot_ateam</strong>中同名的repository。</p>
+
+
+
+<h2 id="clone-repository">Clone Repository</h2>
+
+<p>兩種方式</p>
+
+
+
+<h3 id="全新專案">全新專案</h3>
+
+<p>一種是直接glone ssh://gerrit.iiot.io/{project} <br>
+並且要設定<code>git config remote.origin.push refs/heads/*:refs/for/*</code> <br>
+然後設定hooks，這樣commits才會有Change-Id(<code>scp -p gerrit.iiot.io:hooks/commit-msg .git/hooks</code>)</p>
+
+<p><strong>gnew</strong></p>
+
+
+
+<pre class="prettyprint"><code class=" hljs bash"><span class="hljs-shebang">#!/bin/bash</span>
+FOL=<span class="hljs-string">"<span class="hljs-variable">${PWD##*/}</span>"</span>
+git remote add origin ssh://gerrit.iiot.io/<span class="hljs-variable">$FOL</span>.git
+scp -p gerrit.iiot.io:hooks/commit-msg .git/hooks/
+git config remote.origin.push refs/heads/*:refs/<span class="hljs-keyword">for</span>/*
+</code></pre>
+
+
+
+<h3 id="既有專案">既有專案</h3>
+
+<p>已經在bitbucket上有的repository，可以直接增加gerrit server位置 <br>
+這部分的語法我寫在<code>~/bin/gadd</code>，因此可以直接clone bitbucket的code以後，在資料夾下指令<code>gadd</code>即可 <br>
+適用於目前已經有的bitbucket repository並且尚未轉移到gerrit (smartadmin)</p>
+
+<p><strong>gadd</strong></p>
+
+
+
+<pre class="prettyprint"><code class=" hljs bash"><span class="hljs-shebang">#!/bin/bash</span>
+FOL=<span class="hljs-string">"<span class="hljs-variable">${PWD##*/}</span>"</span>
+git remote add gerrit ssh://gerrit.iiot.io/<span class="hljs-variable">$FOL</span>.git
+scp -p gerrit.iiot.io:hooks/commit-msg .git/hooks/
+git config remote.gerrit.push refs/heads/*:refs/<span class="hljs-keyword">for</span>/*</code></pre>
+
+
+
+<h2 id="gerrit-使用">Gerrit 使用</h2>
+
+
+
+<h3 id="commit">commit</h3>
+
+<p>如果是採用<strong>Clone Repository</strong>章節講述的方法1(全新專案)，指令為</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs avrasm">git clone ssh@gerrit<span class="hljs-preprocessor">.iiot</span><span class="hljs-preprocessor">.io</span>/{some project}
+gnew
+<span class="hljs-preprocessor">## 壹些修改</span>
+git <span class="hljs-keyword">add</span>
+git cz
+git <span class="hljs-keyword">push</span> origin HEAD:{branch}</code></pre>
+
+<p>比較特別的是要使用<code>git push origin HEAD:{branch}</code>這樣的方式</p>
+
+<p>如果是採用方法2(既有專案)</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs avrasm">git clone https://{username}@bitbucket<span class="hljs-preprocessor">.org</span>/iiot_ateam/{project}<span class="hljs-preprocessor">.git</span>
+gadd
+<span class="hljs-preprocessor">## 壹些修改</span>
+git <span class="hljs-keyword">add</span>
+git cz
+git <span class="hljs-keyword">push</span> gerrit HEAD:{branch}</code></pre>
+
+<p>commit格式可利用工具達成</p>
+
+
+
+<h3 id="建立branch">建立Branch</h3>
+
+<p>每當要開發新項目時，一率從master 建立一個新的branch，命名為feat-xxxx</p>
+
+<p>一但經過測試後會merge回master，並將feat-xxxx刪除。其餘develop等測試時暫存branch，測試完後刪除。</p>
+
+<p>建立Branch的方式</p>
+
+<p><strong>Gerrit的使用需要一個initial commit</strong></p>
+
+<p>所以每當開一個新的branch，要先push上去，接著改的code 才能進入到review系統</p>
+
+<p>一般流程：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs avrasm"><span class="hljs-preprocessor"># 位於master</span>
+git branch feat-mynewfeature
+git checkout feat-mynewfeature
+git <span class="hljs-keyword">push</span> origin HEAD:{branch} <span class="hljs-preprocessor"># or git push gerrit HEAD:{branch}</span>
+<span class="hljs-preprocessor"># edit code</span>
+git <span class="hljs-keyword">add</span>
+git cz
+git <span class="hljs-keyword">push</span> origin HEAD:{branch}</code></pre></div></body>
+</html>
